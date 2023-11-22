@@ -1,4 +1,4 @@
-import PostModel from '../models/Post.js';
+import PostModel from './models/Post.js';
 
 export const addComment = async (req, res) => {
   const { postId } = req.params;
