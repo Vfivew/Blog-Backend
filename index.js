@@ -2,14 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import multer from 'multer';
 import cors from 'cors';
-import dotenv from 'dotenv';
+
 import fs from 'fs';
 
 import { registerValidation, postCreateValidation, loginValidation } from './validations/auth.js';
 import { handleValidationErrors, cheakAuth } from './utils/index.js';
 import { UserController, PostController, CommentController } from './controllers/index.js';
 
-dotenv.config();
+
 const MONGODB_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 4000;
 

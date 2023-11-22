@@ -1,11 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcrypt";
-import dotenv from 'dotenv';
 import UserModel from './models/User.js';
 
 export const register = async (req, res) => {
 
-    dotenv.config();
+
     const API_KEY = process.env.API_KEY;
 
     try { 
@@ -49,7 +48,7 @@ export const register = async (req, res) => {
     }
 }
 export const login = async (req, res) => {
-    dotenv.config();
+
     const API_KEY = process.env.API_KEY
     try {
         const user = await UserModel.findOne({ email: req.body.email });
@@ -93,7 +92,7 @@ export const login = async (req, res) => {
     }
 }
 export const getMe = async (req, res) => {
-    dotenv.config();
+
     const API_KEY = process.env.API_KEY
     try {
         const user = await UserModel.findById(req.userId);
