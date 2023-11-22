@@ -7,7 +7,7 @@ export const register = async (req, res) => {
 
     dotenv.config();
     const API_KEY = process.env.API_KEY
-    
+
     try { 
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10)
@@ -49,6 +49,8 @@ export const register = async (req, res) => {
     }
 }
 export const login = async (req, res) => {
+    dotenv.config();
+    const API_KEY = process.env.API_KEY
     try {
         const user = await UserModel.findOne({ email: req.body.email });
 
@@ -91,6 +93,8 @@ export const login = async (req, res) => {
     }
 }
 export const getMe = async (req, res) => {
+    dotenv.config();
+    const API_KEY = process.env.API_KEY
     try {
         const user = await UserModel.findById(req.userId);
 
