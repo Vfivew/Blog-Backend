@@ -1,10 +1,13 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from "bcrypt"
-
+import dotenv from 'dotenv'
 import UserModel from '../models/User.js'
 
 export const register = async (req, res) => {
-    const API_KEY = process.env.API_KEY;
+
+    dotenv.config();
+    const API_KEY = process.env.API_KEY
+    
     try { 
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10)

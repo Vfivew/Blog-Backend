@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
 
 export default (req, res, next) => {
+    dotenv.config();
+    const API_KEY = process.env.API_KEY
     const token = (req.headers.authorization || "").replace(/Bearer\s?/, '')
-    
+
     if (token) {
         try {
             const decoded = jwt.verify(token, API_KEY)

@@ -58,7 +58,7 @@ export const getOne = async (req, res) => {
             { _id: postId },
             { $inc: { viewsCount: 1 } },
             { new: true }
-        );
+        ).populate('user', '-passwordHash');
 
         if (!updatedPost) {
             return res.status(404).json({
@@ -149,7 +149,8 @@ export const update = async (req, res) => {
 export const tagsSort = async (req, res) => {
     try {
         const { filter, tag } = req.query;
-        let postsWithTag = await PostModel.find({ tags: tag });
+        let postsWithTag = await PostModel.find({ tags: tag })
+            .populate('user', '-passwordHash');
 
         if (filter === 'new') {
             postsWithTag = postsWithTag
@@ -167,3 +168,18 @@ export const tagsSort = async (req, res) => {
         });
     }
 };
+
+export const getUserPost = async (req, res) => { 
+   try {
+        const userId = req.params.userId;
+
+        const userPosts = await PostModel.find({ user: userId }).populate('user', '-passwordHash');
+
+        res.json(userPosts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: 'Не вдалось отримати пости користувача',
+        });
+    }
+}
